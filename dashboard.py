@@ -4,9 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
 
-# ==========================================
-# KONFIGURASI HALAMAN
-# ==========================================
+
 st.set_page_config(
     page_title="Bike Sharing Dashboard",
     layout="wide",
@@ -37,9 +35,6 @@ DEMAND_ORDER = ["Low Demand", "Medium Demand", "High Demand"]
 PALETTE_2 = ["#93c5fd", "#1d4ed8"]
 
 
-# ==========================================
-# MEMUAT DATA
-# ==========================================
 @st.cache_data
 def load_data():
     current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -56,9 +51,6 @@ def load_data():
 
 df = load_data()
 
-# ==========================================
-# SIDEBAR
-# ==========================================
 with st.sidebar:
     st.header("Filter")
 
@@ -92,9 +84,7 @@ fdf = df[
     & (df["weather_name"].isin(selected_weather))
 ]
 
-# ==========================================
-# HEADER & METRIK
-# ==========================================
+
 st.title("Bike Sharing Dashboard")
 st.caption("Analisis penyewaan sepeda harian periode 2011–2012: pengaruh musim, cuaca, dan jenis pengguna.")
 
@@ -137,9 +127,6 @@ def bar_with_labels(data, x, y, title, xlabel, ylabel, order=None, figsize=(6, 4
     return fig
 
 
-# ----------------------------------------------------
-# TAB 1: PENGARUH MUSIM & CUACA 
-# ----------------------------------------------------
 with tab1:
     st.subheader("Perbedaan rata-rata penyewaan berdasarkan musim dan kondisi cuaca")
 
@@ -204,9 +191,7 @@ with tab1:
         f"**{low_w['weather_name']}** terendah ({low_w['cnt']:,.0f})."
     )
 
-# ----------------------------------------------------
-# TAB 2: ANALISIS JENIS PENGGUNA
-# ----------------------------------------------------
+
 with tab2:
     st.subheader("Perbedaan pengguna casual dan registered: hari kerja vs hari non-kerja")
 
@@ -296,9 +281,7 @@ with tab2:
             f"vs {avg_idx.loc['Non-Working Day', 'registered']:,.0f} pada hari non-kerja."
         )
 
-# ----------------------------------------------------
-# TAB 3: ANALISIS LANJUTAN
-# ----------------------------------------------------
+
 with tab3:
     st.subheader("Korelasi faktor cuaca dengan jumlah penyewaan")
 
@@ -371,9 +354,7 @@ with tab3:
         st.pyplot(fig)
         plt.close(fig)
 
-# ----------------------------------------------------
-# TAB 4: DATA & KESIMPULAN
-# ----------------------------------------------------
+
 with tab4:
     st.subheader("Data Terfilter")
     preview_cols = [
